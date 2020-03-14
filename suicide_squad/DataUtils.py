@@ -80,7 +80,6 @@ def load_pandas_df(local_cache_path="download", squad_version="v1.1", file_split
     with open(file_path, "r", encoding="utf-8") as reader:
         input_data = json.load(reader)["data"]
     
-    train_data_list = [item for topic in input_data['data'] for item in topic['paragraphs'] ]
 
     paragraph_text_list = []
     question_text_list = []
