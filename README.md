@@ -1,7 +1,7 @@
 # Suicide-SQuAD
 
 ## Install Package
-pip install -r requirements.txt
+- pip install -r requirements.txt
 
 ## Running the app
 To run the app navigate to app directory and run the following command: <br>
