@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+{% block title %}Results{% endblock %}
+
+{% block message %}
+<div class="form-group">
+    &nbsp;
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+	<div class="well">
+	<b>Question: </b>{{question}}<br><b>Text: </b>{{text}}<br><b>Answer: </b>{{answer}}
+	</div>
+   </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+<div class="well">
+  	<div class="panel-body"><b>Question: </b>{{question}}<br><b>Text: </b>{{text}}<br><b>Answer: </b>{{answer}}</div>
+  </div>

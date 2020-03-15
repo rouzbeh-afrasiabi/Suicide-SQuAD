@@ -17,4 +17,4 @@ class QuestionAnswering():
 
         all_tokens = self.tokenizer.convert_ids_to_tokens(input_ids)
         answer = ' '.join(all_tokens[torch.argmax(start_scores) : torch.argmax(end_scores)+1])
-        return(answer,start_scores, end_scores)
+        return(answer)
