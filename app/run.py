@@ -47,11 +47,12 @@ def index():
 @app.route('/go')
 def go():
     # save user input in query
+    scores_img=None
     question = request.args.get('question')
     text = request.args.get('text')
     answer=model.predict_pretrained(question,text)
-    fig,ax=model.predict_pretrained_plot(question,text)
-    scores_img=get_image(ax)
+    fig=model.predict_pretrained_plot(question,text,figsize=(15,3))
+    scores_img=get_image(fig)
     
     return render_template(
         'go.html',

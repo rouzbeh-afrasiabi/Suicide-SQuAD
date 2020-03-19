@@ -49,7 +49,8 @@ class QuestionAnswering():
         results['end_scores']=F.softmax(end_scores.flatten(),dim=0).detach().numpy()
         first,last=torch.argmax(start_scores).numpy()-5,torch.argmax(end_scores).numpy()+5
         ax=results.iloc[first:last].plot.bar(x='tokens',legend=False,figsize=figsize,subplots=True,layout=layout);
-        return ax
+        fig,ax=ax.flatten()
+        return fig
         
     def predict_pretrained_score_df(self,question,text):
         start_scores,end_scores,all_tokens=self.predict_pretrained_scores(question,text)
