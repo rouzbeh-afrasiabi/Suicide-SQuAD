@@ -50,10 +50,12 @@ def go():
     question = request.args.get('question')
     text = request.args.get('text')
     answer=model.predict_pretrained(question,text)
+    fig,ax=model.predict_pretrained_plot(question,text)
+    scores_img=get_image(ax)
     
     return render_template(
         'go.html',
-        question=question,text=text,answer=answer)
+        question=question,text=text,answer=answer,scores_img=scores_img)
 
 
 def main():

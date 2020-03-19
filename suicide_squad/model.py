@@ -43,12 +43,13 @@ class QuestionAnswering():
         all_tokens = self.tokenizer.convert_ids_to_tokens(input_ids)
         return(start_scores,end_scores,all_tokens)
     
-    def predict_pretrained_plot(self,question,text):
+    def predict_pretrained_plot(self,question,text,figsize=(5,5),layout=(1,2)):
         start_scores,end_scores,all_tokens=self.predict_pretrained_scores(question,text)
         results=pd.DataFrame({'tokens':all_tokens,'start_scores':F.softmax(start_scores.flatten(),dim=0).detach().numpy()})
         results['end_scores']=F.softmax(end_scores.flatten(),dim=0).detach().numpy()
         first,last=torch.argmax(start_scores).numpy()-5,torch.argmax(end_scores).numpy()+5
-        results.iloc[first:last].plot.bar(x='tokens',legend=False,figsize=(10,7),subplots=True);
+        ax=results.iloc[first:last].plot.bar(x='tokens',legend=False,figsize=figsize,subplots=True,layout=layout);
+        return ax
         
     def predict_pretrained_score_df(self,question,text):
         start_scores,end_scores,all_tokens=self.predict_pretrained_scores(question,text)
