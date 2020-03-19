@@ -2,6 +2,7 @@ from transformers import BertTokenizer, BertForQuestionAnswering,BertConfig
 import torch
 import torch.nn.functional as F
 import pandas as pd
+import re
 
 
 class QuestionAnswering():
@@ -27,7 +28,12 @@ class QuestionAnswering():
             else:
                 answer += ' ' + all_tokens[i]
 #         answer = ' '.join(all_tokens[torch.argmax(start_scores) : torch.argmax(end_scores)+1])
-        return(answer)
+        marked_text=' '.join(all_tokens[:answer_start]) +'<b> '+answer+' </b>'+\
+        ' '.join(all_tokens[answer_end+1:])
+        marked_text=marked_text.replace(' ##','')
+        marked_text=re.search(r'\[SEP\].*\[SEP\]', marked_text)[0]
+        marked_text=re.sub(r'\s*\[SEP\]\s*','',marked_text)
+        return(answer,marked_text)
     
     def predict_pretrained_loc(self,question,text):
         input_ids = self.tokenizer.encode(question, text)
